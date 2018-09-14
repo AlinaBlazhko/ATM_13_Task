@@ -2,6 +2,7 @@ package po;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class LoginPage extends AbstractPage{
@@ -11,6 +12,7 @@ public class LoginPage extends AbstractPage{
     private By submit = By.cssSelector("span.passport-Button-Text");
     private By errorMessage = By.cssSelector("div.passport-Domik-Form-Error");
 
+   @Attachment
    @Step("Perform login")
    public void login(String user, String pwd){
        waitForElementVisible(login);

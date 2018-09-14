@@ -6,7 +6,11 @@ import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
+
 public class AllureAttachmentListener extends TestListenerAdapter{
+
+    MyLogger logger = new MyLogger();
+
     @Attachment(value = "Attachment: {0}", type = "image/png")
     public byte[] makeScreenshot() {
         byte[] array = {1};
@@ -19,13 +23,14 @@ public class AllureAttachmentListener extends TestListenerAdapter{
     }
 
     @Override
-    public void onTestFailure(ITestResult tr){
+    public void onTestFailure(ITestResult tr) {
+        logger.error("Test failed :(");
         makeScreenshot();
     }
 
 
     @Override
     public void onTestSuccess(ITestResult tr){
-        makeScreenshot();
+        logger.info("Test finished success :)");
     }
 }

@@ -3,11 +3,11 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import po.HomePage;
 import po.LoginPage;
-import ru.yandex.qatools.allure.testng.AllureTestListener;
+import util.AllureAttachmentListener;
 
 import static util.WebDriverSingleton.kill;
 
-@Listeners(AllureTestListener.class)
+@Listeners(AllureAttachmentListener.class)
 public class SimpleTest {
 
     HomePage homePage = new HomePage();
