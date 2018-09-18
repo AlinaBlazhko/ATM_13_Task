@@ -22,7 +22,7 @@ public class WebDriverSingleton {
     private static WebDriver init() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe"); // do not forget to add chromedriver.exe file to src/main/resources/
         WebDriver driver = new ChromeDriver();
-        logger.info("Driver init");
+//        logger.info("Driver init");
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -34,7 +34,7 @@ public class WebDriverSingleton {
             try {
                 instance.quit();
             } catch (Exception e) {
-                logger.error("Cannot kill browser");
+//                logger.error("Cannot kill browser");
             } finally {
                 instance = null;
             }

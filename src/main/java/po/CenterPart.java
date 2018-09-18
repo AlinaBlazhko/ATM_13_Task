@@ -2,6 +2,8 @@ package po;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.allure.annotations.Step;
+
 import java.util.*;
 
 /**
@@ -16,18 +18,17 @@ public class CenterPart extends AbstractPage{
 
     private By listOfEmailsInFolder = By.cssSelector("div.mail-MessageSnippet-Content");
 
-    public int countOfDrafts() {
-        return driver.findElements(listOfEmailsInFolder).size();
-    }
-
+    @Step("Open email within folder")
     public void openEmail(){
+        highlightElement(email);
         driver.findElement(email).click();
     }
     public void openDraftEmail(){
         driver.findElement(listOfEmailsInFolder).click();
     }
 
-    public void deleteAllDraftsFromFolder(){
+    @Step("Delete all email from folder for next test")
+    public void deleteAllFromFolder(){
         List<WebElement> checks = driver.findElements(checkboxes);
         if (!(checks).isEmpty()) {
             for (WebElement check : checks) {

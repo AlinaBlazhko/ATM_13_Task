@@ -6,10 +6,13 @@ import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
+import static util.MyLogger.error;
+import static util.MyLogger.info;
+
 
 public class AllureAttachmentListener extends TestListenerAdapter{
 
-    MyLogger logger = new MyLogger();
+    private final static String CLASS = AllureAttachmentListener.class.getName();
 
     @Attachment(value = "Attachment: {0}", type = "image/png")
     public byte[] makeScreenshot() {
@@ -17,6 +20,7 @@ public class AllureAttachmentListener extends TestListenerAdapter{
         try {
             return ((TakesScreenshot)WebDriverSingleton.getWebDriverInstance()).getScreenshotAs(OutputType.BYTES);
         } catch (WebDriverException e){
+            error(CLASS + ": Screenshot was not created" , e);
             e.printStackTrace();
         }
         return array;
@@ -24,13 +28,13 @@ public class AllureAttachmentListener extends TestListenerAdapter{
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        logger.error("Test failed :(");
+        error(CLASS + ": Test failed :( Please look at screenshot in /target/allure-results/ package");
         makeScreenshot();
     }
 
 
     @Override
     public void onTestSuccess(ITestResult tr){
-        logger.info("Test finished success :)");
+        info(CLASS + ": Test finished success :)");
     }
 }
